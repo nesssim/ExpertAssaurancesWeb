@@ -2,25 +2,35 @@
 
 import { useCallback, useSyncExternalStore } from "react";
 
-function getCookieConsentSnapshot() {
-  if (typeof window === "undefined") return null;
-  return localStorage.getItem("cookie-consent");
+const STORAGE_KEY = "cookie-consent";
+const CHANGE_EVENT = "cookie-consent-change";
+
+function getSnapshot(): string | null {
+  if (typeof window === "undefined") return "accepted";
+  return localStorage.getItem(STORAGE_KEY);
 }
 
-function subscribeToCookieConsent(callback: () => void) {
-  window.addEventListener("storage", callback);
-  return () => window.removeEventListener("storage", callback);
+function subscribe(callback: () => void) {
+  const handler = () => callback();
+  window.addEventListener("storage", handler);
+  window.addEventListener(CHANGE_EVENT, handler);
+  return () => {
+    window.removeEventListener("storage", handler);
+    window.removeEventListener(CHANGE_EVENT, handler);
+  };
 }
 
 export function CookieConsent() {
-  const consent = useSyncExternalStore(subscribeToCookieConsent, getCookieConsentSnapshot, () => null);
+  const consent = useSyncExternalStore(subscribe, getSnapshot, () => "accepted");
 
   const handleAccept = useCallback(() => {
-    localStorage.setItem("cookie-consent", "accepted");
+    localStorage.setItem(STORAGE_KEY, "accepted");
+    window.dispatchEvent(new Event(CHANGE_EVENT));
   }, []);
 
   const handleReject = useCallback(() => {
-    localStorage.setItem("cookie-consent", "rejected");
+    localStorage.setItem(STORAGE_KEY, "rejected");
+    window.dispatchEvent(new Event(CHANGE_EVENT));
   }, []);
 
   if (consent !== null) return null;
