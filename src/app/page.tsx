@@ -52,7 +52,7 @@ export default function HomePage() {
             loading="eager"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/90 to-brand-primary/70" />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/70 to-brand-primary/50" />
         </div>
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
           <div className="max-w-2xl">
@@ -100,7 +100,7 @@ export default function HomePage() {
                       className="object-cover"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
                   </div>
                   <h3 className="text-lg font-semibold text-brand-text mb-2">{product.name}</h3>
                   <p className="text-sm text-brand-text-muted">{product.description}</p>
@@ -174,7 +174,7 @@ export default function HomePage() {
             className="object-cover"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-brand-primary/85" />
+          <div className="absolute inset-0 bg-brand-primary/65" />
         </div>
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center text-white">
           <h2 className="text-3xl font-bold lg:text-4xl">Besoin d&apos;un devis ?</h2>

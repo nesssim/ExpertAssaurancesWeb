@@ -21,7 +21,7 @@ export default function ContactPage() {
             priority
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/90 to-brand-primary/70" />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/70 to-brand-primary/50" />
         </div>
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl text-white">Contactez-nous</h1>

@@ -20,7 +20,7 @@ export function ProductHero({ name, tagline, description, image }: ProductHeroPr
             priority
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/90 to-brand-primary/70" />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/70 to-brand-primary/50" />
         </div>
       )}
       {!image && (
