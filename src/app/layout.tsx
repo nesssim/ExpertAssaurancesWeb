@@ -23,6 +23,10 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     siteName: "Expert Assurance",
   },
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

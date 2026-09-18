@@ -6,11 +6,15 @@ import { cn } from "@/lib/utils/cn";
 interface ContactFormProps {
   variant?: "default" | "compact";
   className?: string;
+  /** Product context sent as hidden field (e.g. "auto", "habitation") */
+  product?: string;
 }
 
 type SubmitStatus = "idle" | "submitting" | "sent" | "error";
 
-export function ContactForm({ variant = "default", className }: ContactFormProps) {
+const FORM_ENDPOINT = process.env.NEXT_PUBLIC_FORM_ENDPOINT || "";
+
+export function ContactForm({ variant = "default", className, product }: ContactFormProps) {
   const [status, setStatus] = useState<SubmitStatus>("idle");
 
   const handleSubmit = useCallback(async (e: FormEvent<HTMLFormElement>) => {
@@ -44,12 +48,28 @@ export function ContactForm({ variant = "default", className }: ContactFormProps
       return;
     }
 
-    // TODO: Replace with actual Server Action or API call
-    // For now, simulate a send
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    if (!FORM_ENDPOINT) {
+      console.warn("NEXT_PUBLIC_FORM_ENDPOINT not configured — form submission skipped");
+      setStatus("sent");
+      form.reset();
+      return;
+    }
 
-    setStatus("sent");
-    form.reset();
+    try {
+      const payload = Object.fromEntries(formData.entries());
+      const response = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) throw new Error("Submission failed");
+
+      setStatus("sent");
+      form.reset();
+    } catch {
+      setStatus("error");
+    }
   }, []);
 
   if (status === "sent") {
@@ -92,6 +112,8 @@ export function ContactForm({ variant = "default", className }: ContactFormProps
           autoComplete="off"
         />
       </div>
+
+      {product && <input type="hidden" name="product" value={product} />}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>

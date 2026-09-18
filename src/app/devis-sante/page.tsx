@@ -2,18 +2,18 @@ import type { Metadata } from "next";
 import { ContactForm } from "@/components/ui/ContactForm";
 
 export const metadata: Metadata = {
-  title: "Devis Auto",
-  description: "Demandez votre devis assurance auto gratuit en 2 minutes.",
+  title: "Devis Santé",
+  description: "Demandez votre devis complémentaire santé gratuit en 2 minutes.",
 };
 
-export default function DevisAutoPage() {
+export default function DevisSantePage() {
   return (
     <>
       <section className="bg-gradient-to-br from-brand-primary to-brand-primary-light text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Devis Assurance Auto</h1>
+          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Devis Complémentaire Santé</h1>
           <p className="mt-4 text-white/70 max-w-lg">
-            Répondez à quelques questions et recevez votre devis personnalisé par email sous 24h.
+            Soins de qualité à prix maîtrisé. Répondez à quelques questions pour recevoir votre devis.
           </p>
         </div>
       </section>

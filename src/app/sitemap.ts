@@ -11,6 +11,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/assurance-sante",
     "/devis-auto",
     "/devis-habitation",
+    "/devis-moto",
+    "/devis-sante",
     "/sinistre",
     "/a-propos",
     "/contact",
